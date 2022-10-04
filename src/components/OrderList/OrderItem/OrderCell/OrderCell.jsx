@@ -1,27 +1,29 @@
 import s from './OrderCell.module.scss'
 import { Select } from 'antd'
-import { forwardRef } from 'react'
+import { changePointActionCreator } from '../../../../redux/ordersReducer'
 
-export const OrderCell = forwardRef((props, selectMenuRef) => {
+export const OrderCell = (props) => {
 
-    console.log('select menu ref', selectMenuRef)
-
+    // converting point to readable string format
     const stringifyPoint = (point) => {
-        return `${point[0]}, ${point[1]}`
+        return `${point[0].toFixed(2)}, ${point[1].toFixed(2)}`
     }
 
+    // rendering title cell
     if (props.type === 'title')
         return(
-            <div className={`${s.column} ${s.titleCell}`} ref={selectMenuRef}>
+            <div className={`${s.column} ${s.titleCell}`}>
                 <span className={s.title}>
                     {props.title}
                 </span>
             </div>
         )
+    // rendering point cell
     else {
-        let pointsList = null
+        // defining current point value
+        //and list of points for select options
+        let pointsList
         let currentPoint
-
         if (props.type === 'load'){
             pointsList = props.pointsList.loadPoints
             currentPoint = pointsList[props.pointID]
@@ -31,16 +33,13 @@ export const OrderCell = forwardRef((props, selectMenuRef) => {
             currentPoint = pointsList[props.pointID]
         }
 
-        const onChange = (name, selectedPointID) => {
-            props.changePoint(
+        // handling option selection
+        const changePoint = (name, newPointID) => {
+            props.dispatch(changePointActionCreator(
                 props.orderID,
                 props.type,
-                selectedPointID,
-            )
-        }
-
-        const onOptionClick = () => {
-            props.onOrderClick(props.orderID)
+                newPointID,
+            ))
         }
 
         return(
@@ -48,21 +47,21 @@ export const OrderCell = forwardRef((props, selectMenuRef) => {
                 <Select
                     value={stringifyPoint(currentPoint)}
                     className={s.select}
-                    onChange={value => onChange("point", value)}
+                    onChange={value => changePoint("point", value)}
                 >
                     {
                         (() => {
+                            // rendering select options
                             let optionsJSX = []
                             for (let i = 0; i < pointsList.length; i++){
-                                let className = ''
+                                let className = `${s.selectOption}`
                                 if (pointsList[i] === currentPoint)
-                                    className = s.selectedOption
+                                    className += ` ${s.selected}`
                                 optionsJSX.push(
                                     <Select.Option
                                         className={className}
                                         value={i}
-                                        ref={selectMenuRef}
-                                        onClick={onOptionClick}
+                                        key={i}
                                     >
                                         {stringifyPoint(pointsList[i])}
                                     </Select.Option>
@@ -75,4 +74,4 @@ export const OrderCell = forwardRef((props, selectMenuRef) => {
             </div>
         )
     }
-})
+}

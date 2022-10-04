@@ -1,8 +1,14 @@
 import s from './OrderList.module.scss'
 import { OrderItem } from './OrderItem/OrderItem'
 import { forwardRef } from 'react'
+import { changeSelectedOrderActionCreator } from '../../redux/ordersReducer'
 
 export const OrderList = forwardRef((props, refs) => {
+
+    // handle off-item click for nulling order selection
+    const onEmptyClick = () => {
+        props.dispatch(changeSelectedOrderActionCreator(null))
+    }
     
     return(
         <>
@@ -11,13 +17,19 @@ export const OrderList = forwardRef((props, refs) => {
                     className={s.orderList}
                 >
                     <div className={s.listHeaders}>
-                        <div className={`${s.headerItem} ${s.titleHeader}`}>
+                        <div
+                            className={`${s.headerItem} ${s.titleHeader}`}
+                        >
                             Title
                         </div>
-                        <div className={`${s.headerItem} ${s.pointHeader}`}>
+                        <div
+                            className={`${s.headerItem} ${s.pointHeader}`}
+                        >
                             Load point
                         </div>
-                        <div className={`${s.headerItem} ${s.pointHeader}`}>
+                        <div
+                            className={`${s.headerItem} ${s.pointHeader}`}
+                        >
                             Unload point
                         </div>
                     </div>
@@ -26,12 +38,14 @@ export const OrderList = forwardRef((props, refs) => {
                         for (let i = 0; i < 4; i++) {
                             orderItems.push(
                                 <OrderItem
+                                    key={i}
                                     id={i}
-                                    selected={props.orders.selectedOrder === i}
-                                    changeSelectedOrder={props.changeSelectedOrder}
+                                    selected=
+                                        {props.orders.selectedOrder === i}
+                                    dispatch=
+                                        {props.dispatch}
                                     orderData={props.orders.orderData[i]}
-                                    pointsList={props.pointsList}
-                                    changePoint={props.changePoint}
+                                    pointsList={props.orders.pointsList}
                                     ref={refs}
                                     onOrderClick={props.onOrderClick}
                                 />
@@ -39,6 +53,10 @@ export const OrderList = forwardRef((props, refs) => {
                         }
                         return orderItems
                     })()}
+                    <div
+                        className={s.empty}
+                        onClick={onEmptyClick}
+                    ></div>
                 </div>
             }
         </>

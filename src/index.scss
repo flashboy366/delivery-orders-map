@@ -1,7 +1,7 @@
 @import './AppVariables.scss';
 
 
-// main
+// INDEX
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -17,53 +17,50 @@ code {
 }
 
 
-// split
+// SPLIT
 .gutter {
   background-color: $background-color;
 
   background-repeat: no-repeat;
   background-position: 50%;
 }
-
 .gutter.gutter-horizontal {
   background-image: url('vertical_grip.png');
   cursor: col-resize;
 }
-
 .gutter.gutter-vertical {
   background-image: url('horizontal_grip.png');
   cursor: row-resize;
 }
-
 .split {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
-
 split,
 .gutter.gutter-horizontal {
     float: left;
 }
-
 .split,
 .gutter.gutter-horizontal {
     height: 100%;
 }
-
 .split {
   overflow-y: auto;
   overflow-x: hidden;
 }
 
 
-// ant
+// ANT
 .ant-row {
   flex-wrap: nowrap;
 }
 
 
-// leaflet
+// LEAFLET
 .leaflet-control-container .leaflet-routing-container-hide {
   display: none;
+}
+.leaflet-interactive {
+  cursor: inherit !important;
 }

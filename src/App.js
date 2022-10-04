@@ -4,60 +4,31 @@ import { OrderList } from "./components/OrderList/OrderList"
 import Split from 'react-split'
 import 'antd/dist/antd.min.css'
 import 'leaflet/dist/leaflet.css'
-import { createRef, useEffect, useRef } from 'react'
+import L from 'leaflet'
 
 export const App = (props) => {
+  let appState = props.appState
 
-  let appState = props.appState  
+  // convert lat/long points to leaflet coord objects
+  const routeToCoords = (route) => {
+    return route.map(point => { 
+        return new L.latLng(point[0], point[1])
+      })
+  }
 
   // subscriber for fitting route on map resize
-  let invalidateMapSize = () => { }
-  const fitMapSubscribe = (observer) => invalidateMapSize = observer
+  let fitMap = () => { }
+  const fitMapSubscribe = (observer) => fitMap = observer
+  // drag event for map resize and route fitting
   const onDragEnd = () => {
-    invalidateMapSize(
-      appState.orders.selectedOrder,
-      appState.orders.currentRoute
+    let selectedOrder = appState.orders.selectedOrder
+    let currentCoords = routeToCoords(appState.orders.currentRoute)
+
+    fitMap(
+      selectedOrder,
+      currentCoords,
     )
   }
-
-  // order list clicks handling
-  const onOrderClick = (orderItemID) => (() => {
-    props.changeSelectedOrder(orderItemID)
-  })()
-
-  const onOutsideOrderClick = () => (() => {
-    console.log('outside click')
-    props.changeSelectedOrder(null)
-  })()
-
-  const useOutsideOrderClick = (callback) => {
-    // const ref = createRef()
-    const orderItemRef = createRef()
-    const selectMenuRef = createRef()
-    const refs = useRef({orderItemRef, selectMenuRef})
-    // const ref = useRef()
-
-    useEffect(() => {
-      const onClick = (e) => {
-        if (
-          (refs.current.orderItemRef &&
-          !refs.current.orderItemRef.current.contains(e.target)) &&
-          !refs.current.selectMenuRef.current.contains(e.target)
-        ) {
-          callback()
-        }
-      }
-
-      document.addEventListener('click', onClick)
-      return () => document.removeEventListener('click', onClick)
-    })
-
-    return refs
-  }
-  // const orderItemRef = useOutsideOrderClick(onOutsideOrderClick)
-  // const selectMenuRef = useOutsideOrderClick(onOutsideOrderClick)
-  // const refs = useRef({orderItemRef, selectMenuRef})
-  const refs = useOutsideOrderClick(onOutsideOrderClick)
 
   return (
     <div
@@ -69,14 +40,10 @@ export const App = (props) => {
         onDragEnd={onDragEnd}
       >
         <OrderList
-          onOrderClick={onOrderClick}
           orders={appState.orders}
-          pointsList={appState.pointsList}
-          changeSelectedOrder={props.changeSelectedOrder}
-          changePoint={props.changePoint}
-          ref={refs}
+          dispatch={props.dispatch}
         />
-        <Map 
+        <Map
           fitMapSubscribe={fitMapSubscribe}
           currentRoute={appState.orders.currentRoute}
         />

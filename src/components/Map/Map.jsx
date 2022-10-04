@@ -12,14 +12,15 @@ export const Map = (props) => {
             className={s.mapContainer}
             center={[51.505, -0.09]}
             zoom={13}
-            // minZoom={1}
-            // maxZoom={30}
-
+            minZoom={2}
+            maxZoom={15}
         >
             <Canvas 
                 fitMapSubscribe={props.fitMapSubscribe}
             />
-            <Route currentRoute={props.currentRoute}/>
+            <Route
+                currentRoute={props.currentRoute}
+            />
         </MapContainer>
     )
 }

@@ -3,11 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.scss';
 import { App } from './App';
 import reportWebVitals from './reportWebVitals';
-import state, {
-  subscribe,
-  changeSelectedOrder,
-  changePoint,
-} from './redux/store';
+import store from './redux/reduxStore';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 let renderTree = (state) => {
@@ -15,16 +11,18 @@ let renderTree = (state) => {
     <React.StrictMode>
       <App 
         appState={state}
-        changeSelectedOrder={changeSelectedOrder}
-        changePoint={changePoint}
+        dispatch={store.dispatch.bind(store)}
       />
     </React.StrictMode>
   )
 }
 
-renderTree(state)
+renderTree(store.getState())
 
-subscribe(renderTree)
+store.subscribe(() => {
+  let state = store.getState()
+  renderTree(state)
+})
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
