@@ -1,0 +1,45 @@
+@import './OrderListVariables.scss';
+@import './../../AppVariables.scss';
+
+.orderList {
+    height: 100%;
+
+    overflow: scroll;
+
+    margin: 5px;
+}
+
+.listHeaders {
+    display: flex;
+    flex-direction: row;
+    
+    min-width: fit-content;
+
+    margin: 0 0 $cell-spacing 0;
+    padding: 0 $horizontal-spacing 0 $horizontal-spacing;
+
+    border: 2px double $background-color;
+    border-radius: $roundness;
+
+    background-color: white;
+}
+
+.headerItem {
+    height: $cell-height;
+    line-height: $cell-height;
+
+    min-width: 120px;
+
+    margin: 0 $horizontal-spacing 0 $horizontal-spacing;
+
+    text-align: center;
+    font-weight: bold;
+}
+
+.titleHeader {
+    flex-grow: 1;
+}
+
+.pointHeader {
+    flex-grow: 2;
+}

@@ -1,0 +1,69 @@
+@import './AppVariables.scss';
+
+
+// main
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+
+// split
+.gutter {
+  background-color: $background-color;
+
+  background-repeat: no-repeat;
+  background-position: 50%;
+}
+
+.gutter.gutter-horizontal {
+  background-image: url('vertical_grip.png');
+  cursor: col-resize;
+}
+
+.gutter.gutter-vertical {
+  background-image: url('horizontal_grip.png');
+  cursor: row-resize;
+}
+
+.split {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+split,
+.gutter.gutter-horizontal {
+    float: left;
+}
+
+.split,
+.gutter.gutter-horizontal {
+    height: 100%;
+}
+
+.split {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+
+// ant
+.ant-row {
+  flex-wrap: nowrap;
+}
+
+
+// leaflet
+.leaflet-control-container .leaflet-routing-container-hide {
+  display: none;
+}
