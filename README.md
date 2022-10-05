@@ -5,8 +5,8 @@
 
 # 2. INITIALIZTION
 
-Run "npm install" in the root folder.
+#### Run "npm install" in the root folder.
 
 # 3. RUNNING
 
-Run "npm start".
+#### Run "npm start".
