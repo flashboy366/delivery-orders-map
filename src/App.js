@@ -1,10 +1,13 @@
 import s from './App.module.scss'
+import 'antd/dist/antd.min.css'
+import 'leaflet/dist/leaflet.css'
+
 import { Map } from "./components/Map/Map"
 import { OrderList } from "./components/OrderList/OrderList"
 import Split from 'react-split'
-import 'antd/dist/antd.min.css'
-import 'leaflet/dist/leaflet.css'
 import L from 'leaflet'
+
+
 
 export const App = (props) => {
   let appState = props.appState
@@ -16,15 +19,14 @@ export const App = (props) => {
       })
   }
 
-  // subscriber for fitting route on map resize
-  let fitMap = () => { }
-  const fitMapSubscribe = (observer) => fitMap = observer
-  // drag event for map resize and route fitting
+  // map resize and route fitting
+  let updateMap = () => { }
+  const updateMapSubscribe = (observer) => updateMap = observer
   const onDragEnd = () => {
     let selectedOrder = appState.orders.selectedOrder
     let currentCoords = routeToCoords(appState.orders.currentRoute)
 
-    fitMap(
+    updateMap(
       selectedOrder,
       currentCoords,
     )
@@ -44,8 +46,8 @@ export const App = (props) => {
           dispatch={props.dispatch}
         />
         <Map
-          fitMapSubscribe={fitMapSubscribe}
           currentRoute={appState.orders.currentRoute}
+          updateMapSubscribe={updateMapSubscribe}
         />
       </Split>
     </div>

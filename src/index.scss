@@ -25,29 +25,24 @@ code {
   background-position: 50%;
 }
 .gutter.gutter-horizontal {
-  background-image: url('vertical_grip.png');
+  background-image: url('./resources/vertical_grip.png');
   cursor: col-resize;
 }
 .gutter.gutter-vertical {
-  background-image: url('horizontal_grip.png');
+  background-image: url('./resources/horizontal_grip.png');
   cursor: row-resize;
 }
 .split {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-}
-split,
-.gutter.gutter-horizontal {
-    float: left;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 .split,
 .gutter.gutter-horizontal {
+    float: left;
     height: 100%;
-}
-.split {
-  overflow-y: auto;
-  overflow-x: hidden;
 }
 
 
@@ -58,7 +53,8 @@ split,
 
 
 // LEAFLET
-.leaflet-control-container .leaflet-routing-container-hide {
+.leaflet-control-container
+.leaflet-routing-container-hide {
   display: none;
 }
 .leaflet-interactive {

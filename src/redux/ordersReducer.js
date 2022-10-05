@@ -42,6 +42,8 @@ let initialState = {
     },
 }
 
+
+
 export const ordersReducer = (state = initialState, action) => {
     // update current route coordinates
     const _updateCurrentRoute = (orderID) => {

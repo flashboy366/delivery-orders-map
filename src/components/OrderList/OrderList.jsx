@@ -1,13 +1,20 @@
 import s from './OrderList.module.scss'
+
 import { OrderItem } from './OrderItem/OrderItem'
-import { forwardRef } from 'react'
 import { changeSelectedOrderActionCreator } from '../../redux/ordersReducer'
 
-export const OrderList = forwardRef((props, refs) => {
 
-    // handle off-item click for nulling order selection
+
+export const OrderList = (props) => {
+
+    // order selection
+    const changeSelection = (orderID = null) => {
+        props.dispatch(changeSelectedOrderActionCreator(orderID))
+    }
+
+    // handle empty space click
     const onEmptyClick = () => {
-        props.dispatch(changeSelectedOrderActionCreator(null))
+        changeSelection()
     }
     
     return(
@@ -34,24 +41,22 @@ export const OrderList = forwardRef((props, refs) => {
                         </div>
                     </div>
                     {(() => {
-                        const orderItems = []
+                        let orderItemsJSX = []
                         for (let i = 0; i < 4; i++) {
-                            orderItems.push(
+                            orderItemsJSX.push(
                                 <OrderItem
                                     key={i}
                                     id={i}
                                     selected=
                                         {props.orders.selectedOrder === i}
-                                    dispatch=
-                                        {props.dispatch}
                                     orderData={props.orders.orderData[i]}
                                     pointsList={props.orders.pointsList}
-                                    ref={refs}
-                                    onOrderClick={props.onOrderClick}
+                                    changeSelection={changeSelection}
+                                    dispatch={props.dispatch}
                                 />
                             )
                         }
-                        return orderItems
+                        return orderItemsJSX
                     })()}
                     <div
                         className={s.empty}
@@ -61,4 +66,4 @@ export const OrderList = forwardRef((props, refs) => {
             }
         </>
     )
-})
+}

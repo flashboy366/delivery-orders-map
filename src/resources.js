@@ -1,5 +1,7 @@
 import L from 'leaflet'
 
+
+
 // marker icons for map route
 export const greenIcon = new L.Icon({
     iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',

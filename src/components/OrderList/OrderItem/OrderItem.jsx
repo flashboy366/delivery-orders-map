@@ -1,6 +1,8 @@
 import s from './OrderItem.module.scss'
+
 import { OrderCell } from './OrderCell/OrderCell'
-import { changeSelectedOrderActionCreator } from '../../../redux/ordersReducer'
+
+
 
 export const OrderItem = (props) => {
 
@@ -8,9 +10,9 @@ export const OrderItem = (props) => {
     let style = `${s.orderItem}`
     if (props.selected) style = style.concat(` ${s.selected}`)
 
-    // handling order selection
+    // handling order click
     const onOrderItemClick = () => (() => {
-        props.dispatch(changeSelectedOrderActionCreator(props.id))
+        props.changeSelection(props.id)
     })()
 
     return(
@@ -29,14 +31,14 @@ export const OrderItem = (props) => {
 
                 return(
                     <OrderCell
-                    key={type}
-                    type={type}
-                    pointID={pointID}
-                    pointsList={props.pointsList}
-                    changePoint={props.changePoint}
-                    orderID={props.id}
-                    dispatch={props.dispatch}
-                />
+                        key={type}
+                        type={type}
+                        pointID={pointID}
+                        pointsList={props.pointsList}
+                        changePoint={props.changePoint}
+                        orderID={props.id}
+                        dispatch={props.dispatch}
+                    />
                 )
             })}
         </div>

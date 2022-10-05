@@ -1,15 +1,16 @@
 import { TileLayer, useMap } from "react-leaflet"
 
 
+
 export const Canvas = (props) => {
     let map = useMap()
 
-    // observer for resizing map and fitting route
-    const fitMap = (selectedOrder, routeCoords) => {
+    // resizing map and fitting route
+    const updateMap = (selectedOrder, routeCoords) => {
         map.invalidateSize()
         if (selectedOrder !== null) map.fitBounds(routeCoords)
     }
-    props.fitMapSubscribe(fitMap)
+    props.updateMapSubscribe(updateMap)
     
 
     return(

@@ -1,9 +1,11 @@
 import s from './OrderCell.module.scss'
+
 import { Select } from 'antd'
 import { changePointActionCreator } from '../../../../redux/ordersReducer'
 
-export const OrderCell = (props) => {
 
+
+export const OrderCell = (props) => {
     // converting point to readable string format
     const stringifyPoint = (point) => {
         return `${point[0].toFixed(2)}, ${point[1].toFixed(2)}`
