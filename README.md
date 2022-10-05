@@ -3,7 +3,7 @@
 #### -Node.js: 16.17.1
 #### -npm: 8.15.0
 
-# 2. INITIALIZTION
+# 2. INITIALIZATION
 
 #### Run "npm install" in the root folder.
 
