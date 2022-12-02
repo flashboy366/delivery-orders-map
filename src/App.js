@@ -2,54 +2,54 @@ import s from './App.module.scss'
 import 'antd/dist/antd.min.css'
 import 'leaflet/dist/leaflet.css'
 
-import { Map } from "./components/Map/Map"
-import { OrderList } from "./components/OrderList/OrderList"
+import {Map} from "./components/Map/Map"
+import {OrderList} from "./components/OrderList/OrderList"
 import Split from 'react-split'
 import L from 'leaflet'
 
 
-
 export const App = (props) => {
-  let appState = props.appState
+    let appState = props.appState
 
-  // convert lat/long points to leaflet coord objects
-  const routeToCoords = (route) => {
-    return route.map(point => { 
-        return new L.latLng(point[0], point[1])
-      })
-  }
+    // convert lat/long points to leaflet coord objects
+    const routeToCoords = (route) => {
+        return route.map(point => {
+            return new L.latLng(point[0], point[1])
+        })
+    }
 
-  // map resize and route fitting
-  let updateMap = () => { }
-  const updateMapSubscribe = (observer) => updateMap = observer
-  const onDragEnd = () => {
-    let selectedOrder = appState.orders.selectedOrder
-    let currentCoords = routeToCoords(appState.orders.currentRoute)
+    // map resize and route fitting
+    let updateMap = () => {
+    }
+    const updateMapSubscribe = (observer) => updateMap = observer
+    const onDragEnd = () => {
+        let selectedOrder = appState.orders.selectedOrder
+        let currentCoords = routeToCoords(appState.orders.currentRoute)
 
-    updateMap(
-      selectedOrder,
-      currentCoords,
-    )
-  }
+        updateMap(
+            selectedOrder,
+            currentCoords,
+        )
+    }
 
-  return (
-    <div
-      className={s.app}
-    >
-      <Split
-        className={s.split}
-        sizes={[25, 75]}
-        onDragEnd={onDragEnd}
-      >
-        <OrderList
-          orders={appState.orders}
-          dispatch={props.dispatch}
-        />
-        <Map
-          currentRoute={appState.orders.currentRoute}
-          updateMapSubscribe={updateMapSubscribe}
-        />
-      </Split>
-    </div>
-  );
+    return (
+        <div
+            className={s.app}
+        >
+            <Split
+                className={s.split}
+                sizes={[25, 75]}
+                onDragEnd={onDragEnd}
+            >
+                <OrderList
+                    orders={appState.orders}
+                    dispatch={props.dispatch}
+                />
+                <Map
+                    currentRoute={appState.orders.currentRoute}
+                    updateMapSubscribe={updateMapSubscribe}
+                />
+            </Split>
+        </div>
+    );
 }
