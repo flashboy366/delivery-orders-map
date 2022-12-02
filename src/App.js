@@ -6,6 +6,7 @@ import {Map} from "./components/Map/Map"
 import {OrderList} from "./components/OrderList/OrderList"
 import Split from 'react-split'
 import L from 'leaflet'
+import {BrowserRouter} from "react-router-dom";
 
 
 export const App = (props) => {
@@ -33,23 +34,25 @@ export const App = (props) => {
     }
 
     return (
-        <div
-            className={s.app}
-        >
-            <Split
-                className={s.split}
-                sizes={[25, 75]}
-                onDragEnd={onDragEnd}
+        <BrowserRouter basename={'delivery-map-orders'}>
+            <div
+                className={s.app}
             >
-                <OrderList
-                    orders={appState.orders}
-                    dispatch={props.dispatch}
-                />
-                <Map
-                    currentRoute={appState.orders.currentRoute}
-                    updateMapSubscribe={updateMapSubscribe}
-                />
-            </Split>
-        </div>
+                <Split
+                    className={s.split}
+                    sizes={[25, 75]}
+                    onDragEnd={onDragEnd}
+                >
+                    <OrderList
+                        orders={appState.orders}
+                        dispatch={props.dispatch}
+                    />
+                    <Map
+                        currentRoute={appState.orders.currentRoute}
+                        updateMapSubscribe={updateMapSubscribe}
+                    />
+                </Split>
+            </div>
+        </BrowserRouter>
     );
 }

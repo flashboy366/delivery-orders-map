@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/delivery-map-orders/static/css/main.4fb50d88.css",
-    "main.js": "/delivery-map-orders/static/js/main.7b5d0931.js",
+    "main.js": "/delivery-map-orders/static/js/main.ff44d596.js",
     "static/js/787.3b92747d.chunk.js": "/delivery-map-orders/static/js/787.3b92747d.chunk.js",
     "index.html": "/delivery-map-orders/index.html",
     "main.4fb50d88.css.map": "/delivery-map-orders/static/css/main.4fb50d88.css.map",
-    "main.7b5d0931.js.map": "/delivery-map-orders/static/js/main.7b5d0931.js.map",
+    "main.ff44d596.js.map": "/delivery-map-orders/static/js/main.ff44d596.js.map",
     "787.3b92747d.chunk.js.map": "/delivery-map-orders/static/js/787.3b92747d.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.4fb50d88.css",
-    "static/js/main.7b5d0931.js"
+    "static/js/main.ff44d596.js"
   ]
 }
